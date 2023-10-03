@@ -17,3 +17,13 @@ def test_calculate_total_price(get_item):
 def test_apply_discount(get_item):
     Item.pay_rate = 0.85
     assert get_item.apply_discount() == 17000
+
+
+def test_name(get_item):
+    assert get_item.name == "Ноутбук"
+
+    get_item.name = "СуперСмартфон"
+    assert get_item.name == "СуперСмарт"
+
+    get_item.name = "Смарт"
+    assert get_item.name == "Смарт"

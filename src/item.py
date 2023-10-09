@@ -24,6 +24,14 @@ class Item:
         # Добавляем при инициализации экземпляр класса в список
         self.all.append(self)
 
+    def __repr__(self) -> str:
+        """Возвращает строку с информацией о классе для разработчика"""
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """Возвращает строку с информацией о классе для пользователя"""
+        return f"{self.__name}"
+
     @property
     def name(self):
         """
@@ -38,7 +46,7 @@ class Item:
         """
         if len(name) <= 10:
             self.__name = name
-        elif len(name) > 10:
+        else:
             self.__name = name[:10]
 
     def calculate_total_price(self) -> float:

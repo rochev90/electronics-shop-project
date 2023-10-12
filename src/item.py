@@ -69,7 +69,7 @@ class Item:
         """
         Открывает файл в формате csv и создает из его данных экземпляры класса
         """
-        with open(filename, newline='') as file:
+        with open(filename, newline='', encoding='cp1251') as file:
             reader = pandas.read_csv(file)
             items = []
             for i in reader:

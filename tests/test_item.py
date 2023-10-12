@@ -15,7 +15,7 @@ def test_repr(get_item):
 
 
 def test_str(get_item):
-    assert get_item.__str__() == 'Смартфон'
+    assert get_item.__str__() == 'Ноутбук'
 
 
 def test_calculate_total_price(get_item):

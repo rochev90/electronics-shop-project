@@ -64,12 +64,17 @@ class Item:
         self.price = self.price * self.pay_rate
         return self.price
 
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        raise TypeError("Складывать можно только объекты классов с родительским классом Item")
+
     @classmethod
     def instantiate_from_csv(cls, filename):
         """
         Открывает файл в формате csv и создает из его данных экземпляры класса
         """
-        with open(filename, newline='', encoding='cp1251') as file:
+        with open(filename, newline='') as file:
             reader = pandas.read_csv(file)
             items = []
             for i in reader:

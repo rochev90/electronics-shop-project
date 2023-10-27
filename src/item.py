@@ -74,11 +74,10 @@ class Item:
             with open(filename, newline='') as file:
                 reader = csv.DictReader(file)
 
-                if len(reader.fieldnames) != 3:
-                    raise InstantiateCSVError
-
                 items = []
                 for i in reader:
+                    if 'name' not in i or 'price' not in i or 'quantity' not in i:
+                        raise InstantiateCSVError("Файл items.csv поврежден")
                     name = str(i['name'])
                     price = float(i['price'])
                     quantity = int(i['quantity'])
@@ -87,9 +86,8 @@ class Item:
                 cls.all = items
 
         except FileNotFoundError:
-            print(f"Отсутствует файл {filename}.")
-        except InstantiateCSVError:
-            print(f"Файл {filename} поврежден.")
+            raise FileNotFoundError("Отсутствует файл items.csv")
+
 
 
     @staticmethod

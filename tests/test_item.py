@@ -4,7 +4,7 @@ import csv
 from src.ExeptionsErrors import InstantiateCSVError
 import pytest
 from src.item import Item
-from src.phone import Phone
+
 
 
 @pytest.fixture
@@ -41,14 +41,10 @@ def test_name(get_item):
 
 
 def test_instantiate_from_csv():
-    """ Отсутствие файла"""
-    with pytest.raises(FileNotFoundError):
-        with open('../src/itemss.csv', newline='') as file:
-            reader = csv.DictReader(file)
+    with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
+        Item.instantiate_from_csv('../src/itemss.csv')
 
 
 def test_instantiate_from_csv2():
-    """ Повреждение файла"""
-    with pytest.raises(InstantiateCSVError):
-        Item.instantiate_from_csv('../tests/test_item.csv')
-        assert "Файл ../tests/test_item.csv поврежден."
+    with pytest.raises(InstantiateCSVError, match="Файл items.csv поврежден"):
+        Item.instantiate_from_csv('../src/item.csv')
